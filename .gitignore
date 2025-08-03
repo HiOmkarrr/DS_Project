@@ -1,4 +1,375 @@
-/datasets
-dvc_project_secrets.json
-dvc_project_secrets.json
+# =============================================================================
+# Fashion E-commerce Analytics Platform - .gitignore
+# =============================================================================
+
+# ============================
+# SECURITY & CREDENTIALS
+# ============================
+# Never commit any authentication files or secrets
+*.secret
+*.credentials
+*.key
+*.pem
+*.p12
+*.pfx
 client_secrets.json
+dvc_project_secrets.json
+google_credentials.json
+service_account.json
+auth_token.json
+.env
+.env.local
+.env.production
+.env.staging
+config.ini
+secrets.yaml
+secrets.yml
+
+# OAuth and API Keys
+*_secrets.json
+*_credentials.json
+*_config.json
+api_key.txt
+access_token.txt
+
+# ============================
+# DATA FILES & DATASETS
+# ============================
+# Large data files managed by DVC
+/datasets/
+/data/
+*.csv
+*.xlsx
+*.xls
+*.json
+*.parquet
+*.feather
+*.hdf5
+*.h5
+*.pkl
+*.pickle
+*.joblib
+*.npy
+*.npz
+
+# Temporary data files
+temp_data/
+tmp/
+cache/
+processed_data/
+raw_data/
+external_data/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# ============================
+# PYTHON ENVIRONMENT
+# ============================
+# Virtual environments
+dvc_env/
+venv/
+env/
+ENV/
+.venv/
+.ENV/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# ============================
+# JUPYTER NOTEBOOKS
+# ============================
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+*.ipynb
+
+# Jupyter Notebook config
+jupyter_config/
+.jupyter/
+
+# ============================
+# ML MODELS & EXPERIMENTS
+# ============================
+# Trained models
+models/
+*.model
+*.pkl
+*.h5
+*.hdf5
+*.pb
+*.onnx
+*.tflite
+checkpoints/
+saved_models/
+
+# MLflow
+mlruns/
+mlflow.db
+mlflow_tracking/
+
+# Weights & Biases
+wandb/
+
+# TensorBoard logs
+logs/
+tensorboard_logs/
+
+# Experiment tracking
+experiments/
+tracking/
+artifacts/
+
+# ============================
+# IDE & EDITOR FILES
+# ============================
+# VSCode
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# ============================
+# OPERATING SYSTEM
+# ============================
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ============================
+# STREAMLIT
+# ============================
+.streamlit/
+streamlit_config.toml
+
+# ============================
+# DOCKER & CONTAINERIZATION
+# ============================
+# Docker
+.dockerignore
+docker-compose.override.yml
+.docker/
+
+# Kubernetes
+*.kubeconfig
+
+# ============================
+# CI/CD & DEPLOYMENT
+# ============================
+# GitHub Actions
+.github/workflows/secrets.yml
+
+# Deployment configs
+deploy/
+deployment/
+k8s/
+helm/
+terraform/
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
+# ============================
+# LOGS & TEMPORARY FILES
+# ============================
+# Log files
+*.log
+logs/
+log/
+*.out
+*.err
+
+# Temporary files
+tmp/
+temp/
+temporary/
+*.tmp
+*.temp
+*.bak
+*.backup
+*.old
+*.orig
+
+# ============================
+# DOCUMENTATION BUILD
+# ============================
+# Sphinx documentation
+docs/_build/
+site/
+
+# ============================
+# MISCELLANEOUS
+# ============================
+# Archive files
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Large media files
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.mp3
+*.wav
+*.flac
+
+# Fonts
+*.ttf
+*.otf
+*.woff
+*.woff2
+
+# Images (if large)
+# *.png
+# *.jpg
+# *.jpeg
+# *.gif
+# *.bmp
+# *.tiff
+
+# Office files
+*.docx
+*.pptx
+*.xlsx
+
+# Configuration overrides
+local_config.py
+local_settings.py
+settings_local.py
+
+# ============================
+# PROJECT SPECIFIC
+# ============================
+# Fashion E-commerce specific ignores
+fashion_data/
+customer_data/
+sales_reports/
+analytics_cache/
+
+# DVC specific (already handled by .dvcignore but adding for completeness)
+.dvc/cache/
+.dvc/tmp/
+
+# Notebook outputs
+outputs/
+results/
+plots/
+figures/
+
+# Model artifacts
+model_artifacts/
+model_registry/
+feature_store/
+
+# Performance logs
+performance_logs/
+profiling_results/
