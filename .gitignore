@@ -162,7 +162,7 @@ logs/
 tensorboard_logs/
 
 # Experiment tracking
-experiments/
+
 tracking/
 artifacts/
 
