@@ -31,7 +31,7 @@ from experiments.statistical_analysis import StatisticalAnalysis
 
 # Configure Streamlit page
 st.set_page_config(
-    page_title="Fashion E-commerce Analytics Platform",
+    page_title="Zudio E-commerce Analytics Platform",
     page_icon="🛍️",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -92,7 +92,7 @@ def main():
     # Header
     st.markdown("""
     <div class="main-header">
-        <h1>🛍️ Fashion E-commerce Analytics Platform</h1>
+        <h1>🛍️ Zudio E-commerce Analytics Platform</h1>
         <p>Comprehensive Data Science Project with 8 Experiments & GUI-based Activities</p>
     </div>
     """, unsafe_allow_html=True)
@@ -104,7 +104,7 @@ def main():
     # Project overview in sidebar
     with st.sidebar.expander("📊 Project Overview"):
         st.write("""
-        **Domain**: Fashion E-commerce Analytics
+        **Domain**: Zudio E-commerce Analytics
         
         **Datasets**:
         - 🏷️ Product Catalog (1,242 items)
@@ -213,6 +213,9 @@ def render_experiment_1():
                         exp1.define_schema()
                     elif activity == "🎯 Baseline Model Planning":
                         exp1.baseline_planning()
+    
+    # Add Enhanced Dataset Functionality at the bottom
+    exp1.add_enhanced_dataset_section()
     
     with col2:
         st.markdown("""
