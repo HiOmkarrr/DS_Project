@@ -56,7 +56,7 @@ st.markdown("""
         margin-bottom: 1rem;
     }
     .activity-card {
-        background: #e3f2fd;
+        background: red;
         padding: 1rem;
         border-radius: 8px;
         margin: 0.5rem 0;

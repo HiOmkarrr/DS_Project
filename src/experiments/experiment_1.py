@@ -868,7 +868,7 @@ git commit -m "Add dataset with DVC"
             
             loaded_datasets = {}
             for name, filename in dataset_files.items():
-                file_path = os.path.join(self.datasets_path, "DS-2-8-25", filename)
+                file_path = os.path.join(self.data_path, filename)
                 if os.path.exists(file_path):
                     loaded_datasets[name] = pd.read_csv(file_path)
                     st.success(f"✅ Loaded {name} dataset: {len(loaded_datasets[name])} records")
@@ -895,11 +895,17 @@ git commit -m "Add dataset with DVC"
                 for idx, row in base_df.iterrows():
                     enhanced_record = dict(row)
                     
-                    # Original features
-                    product_name = str(row.get('Product_Name', '')).lower()
-                    category = str(row.get('Category', '')).lower()
-                    brand = str(row.get('Brand', '')).lower()
-                    price = float(row.get('Price', 0))
+                    # Original features - handle different possible column names
+                    product_name = str(row.get('Product_Name', row.get('product_name', row.get('name', '')))).lower()
+                    category = str(row.get('Category', row.get('category', ''))).lower()
+                    brand = str(row.get('Brand', row.get('brand', ''))).lower()
+                    
+                    # Find price column - could be 'Price', 'price', etc.
+                    price = 0
+                    for col in ['Price', 'price', 'PRICE', 'cost', 'Cost']:
+                        if col in row and pd.notna(row.get(col)):
+                            price = float(row.get(col, 0))
+                            break
                     
                     # Product Intelligence Features
                     enhanced_record.update({
@@ -971,9 +977,11 @@ git commit -m "Add dataset with DVC"
                         'optimal_season_match': int((product_launch.month in [3,4,5] and 'spring' in product_name) or 
                                                    (product_launch.month in [6,7,8] and 'summer' in product_name) or
                                                    (product_launch.month in [9,10,11] and 'fall' in product_name) or
-                                                   (product_launch.month in [12,1,2] and 'winter' in product_name)),
-                        'counter_seasonal': int(not enhanced_record['optimal_season_match'])
+                                                   (product_launch.month in [12,1,2] and 'winter' in product_name))
                     })
+                    
+                    # Calculate counter_seasonal after optimal_season_match is set
+                    enhanced_record['counter_seasonal'] = int(not enhanced_record['optimal_season_match'])
                     
                     # Customer Behavioral Analytics (20+ features)
                     enhanced_record.update({
@@ -1103,17 +1111,27 @@ git commit -m "Add dataset with DVC"
             # Select numeric columns for correlation
             numeric_cols = enhanced_df.select_dtypes(include=[np.number]).columns.tolist()
             if len(numeric_cols) > 10:
-                # Show top correlations with price
-                price_corr = enhanced_df[numeric_cols].corrwith(enhanced_df['Price']).abs().sort_values(ascending=False)
+                # Find the price column (could be 'Price', 'price', or similar)
+                price_column = None
+                for col in enhanced_df.columns:
+                    if 'price' in col.lower() and col in numeric_cols:
+                        price_column = col
+                        break
                 
-                fig_corr = px.bar(
-                    x=price_corr.head(10).values,
-                    y=price_corr.head(10).index,
-                    orientation='h',
-                    title="Top 10 Features Correlated with Price",
-                    labels={'x': 'Absolute Correlation', 'y': 'Features'}
-                )
-                st.plotly_chart(fig_corr, use_container_width=True)
+                if price_column:
+                    # Show top correlations with price
+                    price_corr = enhanced_df[numeric_cols].corrwith(enhanced_df[price_column]).abs().sort_values(ascending=False)
+                    
+                    fig_corr = px.bar(
+                        x=price_corr.head(10).values,
+                        y=price_corr.head(10).index,
+                        orientation='h',
+                        title=f"Top 10 Features Correlated with {price_column}",
+                        labels={'x': 'Absolute Correlation', 'y': 'Features'}
+                    )
+                    st.plotly_chart(fig_corr, use_container_width=True)
+                else:
+                    st.info("Price column not found for correlation analysis")
             
             # Feature Engineering Summary
             st.subheader("⚙️ Feature Engineering Summary")
@@ -1133,7 +1151,7 @@ git commit -m "Add dataset with DVC"
             st.subheader("💾 Save Enhanced Dataset")
             
             if st.button("Save Enhanced Dataset", type="primary"):
-                enhanced_file_path = os.path.join(self.datasets_path, "enhanced_dataset_with_100plus_features.csv")
+                enhanced_file_path = os.path.join(self.data_path, "enhanced_dataset_with_100plus_features.csv")
                 enhanced_df.to_csv(enhanced_file_path, index=False)
                 st.success(f"✅ Enhanced dataset saved to: {enhanced_file_path}")
                 
