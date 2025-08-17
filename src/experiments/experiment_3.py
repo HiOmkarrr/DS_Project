@@ -1,25 +1,26 @@
 """
-Experiment 3: EDA & Statistical Analysis
-Comprehensive Exploratory Data Analysis with advanced visualizations
+Experiment 3: Exploratory Data Analysis & Statistical Analysis
+Comprehensive EDA implementation with 15+ analytical activities
 """
 
 import streamlit as st
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-import seaborn as sns
-import matplotlib.pyplot as plt
-from scipy import stats
+import scipy.stats as stats
+from scipy.stats import chi2_contingency, ttest_ind, f_oneway
+import os
 import warnings
 warnings.filterwarnings('ignore')
 
 class Experiment3:
     def __init__(self):
         self.project_path = r"C:\Users\Omkar\SEM_7\DS_Project"
-        self.data_path = r"C:\Users\Omkar\SEM_7\DS_Project\datasets\DS-2-8-25"
-        self.datasets = {}
+        self.data_path = os.path.join(self.project_path, "datasets", "DS-2-8-25")
         
     def render_eda_dashboard(self):
         """Main EDA dashboard with comprehensive analysis"""
