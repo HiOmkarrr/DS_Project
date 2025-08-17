@@ -126,9 +126,9 @@ cover/
 # ============================
 # JUPYTER NOTEBOOKS
 # ============================
-.ipynb_checkpoints/
-*/.ipynb_checkpoints/*
-*.ipynb
+# .ipynb_checkpoints/
+# */.ipynb_checkpoints/*
+# *.ipynb
 
 # Jupyter Notebook config
 jupyter_config/
