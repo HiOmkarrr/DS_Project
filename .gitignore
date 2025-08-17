@@ -373,3 +373,4 @@ feature_store/
 # Performance logs
 performance_logs/
 profiling_results/
+/datasets
